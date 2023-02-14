@@ -20,4 +20,11 @@ function addBookToLibrary(title, author, pages, read) {
   myLibrary.push(book);
 }
 
+const bookOne = addBookToLibrary(
+  'Basic Economics',
+  'Thomas Sowell',
+  912,
+  'reading'
+);
 console.log(myLibrary);
+console.log(bookOne);
