@@ -3,6 +3,29 @@
 /* eslint-disable comma-dangle */
 /* eslint-disable no-console */
 
+let modalBtn = document.getElementById('modal-btn');
+let modal = document.querySelector('.modal');
+let closeBtn = document.querySelector('.close-btn');
+
+modalBtn.onclick = function (e) {
+  if (e.target == modal) {
+    modal.style.display = 'none';
+  }
+  modal.style.display = 'block';
+};
+closeBtn.onclick = function () {
+  modal.style.display = 'none';
+};
+// window.onclick = function(e) {
+//   if (e.target == modal) {
+//     modal.style.display = "none"
+//   }
+// }
+
+// TO DO
+
+//Create functions and addEventlisteners to the modal
+
 let myLibrary = [];
 
 function Book(title, author, pages, read) {
