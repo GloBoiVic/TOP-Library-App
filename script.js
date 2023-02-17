@@ -1,3 +1,4 @@
+/* eslint-disable no-use-before-define */
 /* eslint-disable prefer-const */
 /* eslint-disable func-names */
 /* eslint-disable comma-dangle */
@@ -51,21 +52,44 @@ function addBookToLibrary(title, author, pages, read) {
 // Display books to page
 function displayBooks() {
   const books = document.querySelector('.books');
+  const tables = document.querySelector('table');
+  const tblHead = document.querySelector('thead');
+  const tblBody = document.querySelector('tbody');
+  console.log(tables, tblHead, tblBody);
 
   // Loop over the library array and display to the table
-  myLibrary.forEach((library) => {});
+  myLibrary.forEach((library) => {
+    const tblRow = document.createElement('tr');
+    const cell = document.createElement('td');
+    tblHead.appendChild(tblRow);
+    tblBody.appendChild(cell);
+
+    for (let key in library) {
+      console.log(`${key}: ${library}`);
+    }
+  });
 }
+
+displayBooks();
 
 // Add form inputs to array
 const submitBtn = document.querySelector('#add-btn');
-submitBtn.addEventListener('click', getFormData);
+submitBtn.addEventListener('click', getFormData, false);
 
-function getFormData() {
+function getFormData(e) {
   const title = document.querySelector('#book-title').value;
   const author = document.querySelector('#book-author').value;
   const pages = document.querySelector('#book-pages').value;
   const read = document.querySelector('#read-status').value;
   console.log(title, author, pages, read);
+
+  // Break out of form if empty
+  if (title === '' || author === '' || pages === '') {
+    return;
+  }
+
+  // Prevent default submit behavior
+  e.preventDefault();
 
   // AddLibrary function take add input data to array
   addBookToLibrary(title, author, pages, read);
@@ -73,4 +97,3 @@ function getFormData() {
   // Clear out from after
   document.querySelector('#myform').reset();
 }
-getFormData();
