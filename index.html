@@ -4,6 +4,12 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="styles.css" />
     <script src="script.js" defer></script>
     <title>Top Library App</title>
@@ -16,10 +22,10 @@
       </header>
 
       <main>
-        <button id="modal-btn" type="button">+ New Book</button>
-        <div id="form-modal" class="modal">
+        <button class="modal-btn" type="button">+ New Book</button>
+        <div class="modal">
           <span class="close-btn">&times;</span>
-          <form>
+          <form id="myform">
             <div class="form-cell">
               <label for="book-title">Title</label>
               <input type="text" id="book-title" name="book-title" required />
@@ -33,42 +39,55 @@
               <input type="number" id="book-pages" name="book-pages" required />
             </div>
             <div class="form-cell">
-              <label for="read-status">Read Status</label>
+              <label for="read-status">Read Status ?</label>
               <select name="read-status" id="read-status">
                 <option value="read">Read</option>
-                <option value="not-read">Not read</option>
+                <option value="unread">Unread</option>
               </select>
             </div>
             <div class="form-cell">
-              <button type="submit">Add Book</button>
+              <button type="submit" id="add-btn">Add Book</button>
             </div>
           </form>
         </div>
 
         <div class="books">
           <table>
-            <tr>
-              <th>Title</th>
-              <th>Author</th>
-              <th>Pages</th>
-              <th>Status</th>
-            </tr>
-            <tr>
-              <td>Basic Economics</td>
-              <td>Thomas Sowell</td>
-              <td>920</td>
-              <td>
-                <button class="read-status">Read</button>
-              </td>
-            </tr>
-            <tr>
-              <td>The Richest Man in Babylon</td>
-              <td>George Clauson</td>
-              <td>450</td>
-              <td>
-                <button class="read-status">Unread</button>
-              </td>
-            </tr>
+            <thead>
+              <tr>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Pages</th>
+                <th>Status</th>
+                <th></th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr>
+                <td>Basic Economics</td>
+                <td>Thomas Sowell</td>
+                <td>920</td>
+                <td>
+                  <button class="read-btn">Read</button>
+                </td>
+                <td>
+                  <button class="delete-btn">Delete</button>
+                </td>
+              </tr>
+
+              <tr>
+                <td>The Richest Man in Babylon</td>
+                <td>George Clauson</td>
+                <td>450</td>
+                <td>
+                  <button class="read-btn">Unread</button>
+                </td>
+                <td>
+                  <button class="delete-btn">Delete</button>
+                </td>
+              </tr>
+            </tbody>
           </table>
         </div>
       </main>
