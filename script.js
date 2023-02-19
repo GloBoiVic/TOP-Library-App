@@ -26,74 +26,84 @@ function Book(title, author, pages, read) {
   this.author = author;
   this.pages = pages;
   this.read = read;
-  // this.info = function () {
-  //   return `${title} by ${author}, ${pages} pages, ${read}`;
-  // };
 }
-
-function addBookToLibrary(title, author, pages, read) {
-  let books = new Book(title, author, pages, read);
-  myLibrary.push(books);
-}
-
-/* const bookOne = addBookToLibrary(
-    'Basic Economics',
-    'Thomas Sowell',
-    912,
-    'reading'
-    );
-    const bookTwo = addBookToLibrary(
-      'Basic Economics',
-      'Thomas Sowell',
-      912,
-      'reading'
-      ); */
 
 // Display books to page
 function displayBooks() {
-  const books = document.querySelector('.books');
-  const tables = document.querySelector('table');
-  const tblHead = document.querySelector('thead');
+  // const libraryEl = document.querySelector('.library-books');
+  const table = document.querySelector('table');
   const tblBody = document.querySelector('tbody');
-  console.log(tables, tblHead, tblBody);
-
   // Loop over the library array and display to the table
   myLibrary.forEach((library) => {
+    console.log(library.title);
     const tblRow = document.createElement('tr');
-    const cell = document.createElement('td');
-    tblHead.appendChild(tblRow);
-    tblBody.appendChild(cell);
 
-    for (let key in library) {
-      console.log(`${key}: ${library}`);
-    }
+    const tblCell1 = document.createElement('td');
+    tblCell1.textContent = library.title;
+    tblRow.appendChild(tblCell1);
+
+    const tblCell2 = document.createElement('td');
+    tblCell2.textContent = library.author;
+    tblRow.appendChild(tblCell2);
+
+    const tblCell3 = document.createElement('td');
+    tblCell3.textContent = library.pages;
+    tblRow.appendChild(tblCell3);
+
+    const tblCell4 = document.createElement('td');
+    tblCell4.textContent = library.read;
+    tblRow.appendChild(tblCell4);
+
+    tblBody.appendChild(tblRow);
+    table.appendChild(tblBody);
+
+    modal.style.display = 'none';
   });
 }
 
-displayBooks();
-
-// Add form inputs to array
-const submitBtn = document.querySelector('#add-btn');
-submitBtn.addEventListener('click', getFormData, false);
-
-function getFormData(e) {
+function addBookToLibrary() {
   const title = document.querySelector('#book-title').value;
   const author = document.querySelector('#book-author').value;
   const pages = document.querySelector('#book-pages').value;
   const read = document.querySelector('#read-status').value;
-  console.log(title, author, pages, read);
 
   // Break out of form if empty
   if (title === '' || author === '' || pages === '') {
-    return;
+    modal.style.display = 'none';
+  } else {
+    const newBook = new Book(title, author, pages, read);
+    myLibrary.push(newBook);
+    console.log(newBook);
+    displayBooks();
   }
-
-  // Prevent default submit behavior
-  e.preventDefault();
-
-  // AddLibrary function take add input data to array
-  addBookToLibrary(title, author, pages, read);
-
-  // Clear out from after
-  document.querySelector('#myform').reset();
 }
+// Add form inputs to array
+const form = document.querySelector('#myform');
+form.addEventListener('submit', (e) => {
+  e.preventDefault();
+  addBookToLibrary();
+  // Clear out form after
+  form.reset();
+});
+
+// function getFormData(e) {
+//   const title = document.querySelector('#book-title').value;
+//   const author = document.querySelector('#book-author').value;
+//   const pages = document.querySelector('#book-pages').value;
+//   const read = document.querySelector('#read-status').value;
+//   console.log(title, author, pages, read);
+
+//   // Break out of form if empty
+//   if (title === '' || author === '' || pages === '') {
+//     return;
+//   }
+
+//   // Prevent default submit behavior
+//   e.preventDefault();
+
+//   // AddLibrary function take add input data to array
+//   addBookToLibrary(title, author, pages, read);
+
+//   // Clear out form after
+//   document.querySelector('#myform').reset();
+// }
