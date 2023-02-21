@@ -28,9 +28,8 @@ function Book(title, author, pages, read) {
   this.read = read;
 }
 
-// Display books to page
+// Display books in table format
 function displayBooks() {
-  // const libraryEl = document.querySelector('.library-books');
   const table = document.querySelector('table');
   const tblBody = document.querySelector('tbody');
   // Loop over the library array and display to the table
@@ -38,7 +37,7 @@ function displayBooks() {
     console.log(library.title);
     const tblRow = document.createElement('tr');
 
-    const tblCell1 = document.createElement('td');
+    let tblCell1 = document.createElement('td');
     tblCell1.textContent = library.title;
     tblRow.appendChild(tblCell1);
 
@@ -51,13 +50,27 @@ function displayBooks() {
     tblRow.appendChild(tblCell3);
 
     const tblCell4 = document.createElement('td');
-    tblCell4.textContent = library.read;
+    const readBtn = document.createElement('button');
+    readBtn.textContent = library.read;
+    readBtn.classList.add('read-btn');
+    tblCell4.appendChild(readBtn);
     tblRow.appendChild(tblCell4);
+
+    const tblCell5 = document.createElement('td');
+    const deleteBtn = document.createElement('button');
+    deleteBtn.textContent = 'Delete';
+    deleteBtn.classList.add('delete-btn');
+    tblCell5.appendChild(deleteBtn);
+    tblRow.appendChild(tblCell5);
 
     tblBody.appendChild(tblRow);
     table.appendChild(tblBody);
 
+    // Goes back to the home screen after each successful add
     modal.style.display = 'none';
+
+    // Clear existing values in array after each iteration
+    myLibrary = [];
   });
 }
 
@@ -86,24 +99,10 @@ form.addEventListener('submit', (e) => {
   form.reset();
 });
 
-// function getFormData(e) {
-//   const title = document.querySelector('#book-title').value;
-//   const author = document.querySelector('#book-author').value;
-//   const pages = document.querySelector('#book-pages').value;
-//   const read = document.querySelector('#read-status').value;
-//   console.log(title, author, pages, read);
-
-//   // Break out of form if empty
-//   if (title === '' || author === '' || pages === '') {
-//     return;
-//   }
-
-//   // Prevent default submit behavior
-//   e.preventDefault();
-
-//   // AddLibrary function take add input data to array
-//   addBookToLibrary(title, author, pages, read);
-
-//   // Clear out form after
-//   document.querySelector('#myform').reset();
-// }
+// Function check to see if delete is clicked
+function removeBook(myLibrary) {
+  myLibrary.forEach((library) => {
+    myLibrary.splice(library, 1);
+    displayBooks();
+  });
+}
