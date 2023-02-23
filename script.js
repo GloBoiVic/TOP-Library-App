@@ -36,6 +36,7 @@ function displayBooks() {
   myLibrary.forEach((library) => {
     console.log(library.title);
     const tblRow = document.createElement('tr');
+    tblRow.dataset.delete = 'removebooks';
 
     let tblCell1 = document.createElement('td');
     tblCell1.textContent = library.title;
@@ -59,7 +60,6 @@ function displayBooks() {
     const tblCell5 = document.createElement('td');
     const deleteBtn = document.createElement('button');
     deleteBtn.textContent = 'Delete';
-    deleteBtn.dataset.delete = 'remove-books';
     deleteBtn.classList.add('delete-btn');
     tblCell5.appendChild(deleteBtn);
     tblRow.appendChild(tblCell5);
@@ -106,11 +106,19 @@ form.addEventListener('submit', (e) => {
 
 // Function check to see if delete is clicked
 const libraryList = document.querySelector('.library-books');
-Array.from(libraryList).forEach((button) => {
-  button.addEventListener('click', removeBook);
+console.log(libraryList);
+libraryList.addEventListener('click', (e) => {
+  const origin = e.target;
+  console.log(origin);
+  myLibrary.forEach((library) => {
+    // Loop over myLibrary array and if each index (library) contains the data atrribute 'removebooks' remove it from the array
+  }
 });
 
-function removeBook() {
-  this.parentElement.remove();
-  console.log(this);
-}
+
+
+
+// function removeBook() {
+//   this.parentElement.remove();
+//   console.log(this);
+// }
