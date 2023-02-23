@@ -59,6 +59,7 @@ function displayBooks() {
     const tblCell5 = document.createElement('td');
     const deleteBtn = document.createElement('button');
     deleteBtn.textContent = 'Delete';
+    deleteBtn.dataset.delete = 'remove-books';
     deleteBtn.classList.add('delete-btn');
     tblCell5.appendChild(deleteBtn);
     tblRow.appendChild(tblCell5);
@@ -70,24 +71,28 @@ function displayBooks() {
     modal.style.display = 'none';
 
     // Clear existing values in array after each iteration
-    myLibrary = [];
+    // myLibrary = [];
   });
 }
+displayBooks();
 
 function addBookToLibrary() {
   const title = document.querySelector('#book-title').value;
   const author = document.querySelector('#book-author').value;
   const pages = document.querySelector('#book-pages').value;
   const read = document.querySelector('#read-status').value;
+  const errorMsg = document.querySelector('.error-msg');
 
   // Break out of form if empty
   if (title === '' || author === '' || pages === '') {
-    modal.style.display = 'none';
+    errorMsg.textContent = 'Please fill out all fields';
+    // modal.style.display = 'none';
   } else {
     const newBook = new Book(title, author, pages, read);
     myLibrary.push(newBook);
     console.log(newBook);
     displayBooks();
+    errorMsg.textContent = '';
   }
 }
 // Add form inputs to array
@@ -100,9 +105,12 @@ form.addEventListener('submit', (e) => {
 });
 
 // Function check to see if delete is clicked
-function removeBook(myLibrary) {
-  myLibrary.forEach((library) => {
-    myLibrary.splice(library, 1);
-    displayBooks();
-  });
+const libraryList = document.querySelector('.library-books');
+Array.from(libraryList).forEach((button) => {
+  button.addEventListener('click', removeBook);
+});
+
+function removeBook() {
+  this.parentElement.remove();
+  console.log(this);
 }
