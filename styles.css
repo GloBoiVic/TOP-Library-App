@@ -45,6 +45,11 @@ main {
   background-color: black;
 }
 
+.error-msg {
+  font-size: 1.2rem;
+  color: rgb(254, 104, 104);
+}
+
 .close-btn {
   position: relative;
   top: 2%;
