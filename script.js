@@ -57,7 +57,7 @@ form.addEventListener('submit', (e) => {
   e.preventDefault();
   addBookToLibrary();
   // Clear existing values in array everytime form submits
-  // myLibrary = [];
+  myLibrary = [];
   // Clear out form everytime modal pops up
   form.reset();
 });
@@ -111,7 +111,6 @@ function displayBooks() {
 function removeBook() {
   const tblBody = document.querySelector('tbody');
   const libraryList = tblBody.children;
-  console.log(libraryList);
   for (list of libraryList) {
     if (list.hasAttribute('data-delete')) {
       list.remove();
