@@ -1,3 +1,6 @@
+/* eslint-disable no-undef */
+/* eslint-disable no-restricted-syntax */
+/* eslint-disable max-len */
 /* eslint-disable no-use-before-define */
 /* eslint-disable prefer-const */
 /* eslint-disable func-names */
@@ -27,6 +30,37 @@ function Book(title, author, pages, read) {
   this.pages = pages;
   this.read = read;
 }
+
+// Get form info from the DOM and push book to library array
+function addBookToLibrary() {
+  const title = document.querySelector('#book-title').value;
+  const author = document.querySelector('#book-author').value;
+  const pages = document.querySelector('#book-pages').value;
+  const read = document.querySelector('#read-status').value;
+  const errorMsg = document.querySelector('.error-msg');
+
+  // Break out of form if empty
+  if (title === '' || author === '' || pages === '') {
+    errorMsg.textContent = 'Please fill out all fields';
+    // modal.style.display = 'none';
+  } else {
+    const newBook = new Book(title, author, pages, read);
+    myLibrary.push(newBook);
+    displayBooks();
+    errorMsg.textContent = '';
+  }
+}
+
+// Add form inputs to array
+const form = document.querySelector('#myform');
+form.addEventListener('submit', (e) => {
+  e.preventDefault();
+  addBookToLibrary();
+  // Clear existing values in array everytime form submits
+  // myLibrary = [];
+  // Clear out form everytime modal pops up
+  form.reset();
+});
 
 // Display books in table format
 function displayBooks() {
@@ -61,6 +95,7 @@ function displayBooks() {
     const deleteBtn = document.createElement('button');
     deleteBtn.textContent = 'Delete';
     deleteBtn.classList.add('delete-btn');
+    deleteBtn.addEventListener('click', removeBook);
     tblCell5.appendChild(deleteBtn);
     tblRow.appendChild(tblCell5);
 
@@ -69,56 +104,29 @@ function displayBooks() {
 
     // Goes back to the home screen after each successful add
     modal.style.display = 'none';
-
-    // Clear existing values in array after each iteration
-    // myLibrary = [];
   });
 }
-displayBooks();
 
-function addBookToLibrary() {
-  const title = document.querySelector('#book-title').value;
-  const author = document.querySelector('#book-author').value;
-  const pages = document.querySelector('#book-pages').value;
-  const read = document.querySelector('#read-status').value;
-  const errorMsg = document.querySelector('.error-msg');
-
-  // Break out of form if empty
-  if (title === '' || author === '' || pages === '') {
-    errorMsg.textContent = 'Please fill out all fields';
-    // modal.style.display = 'none';
-  } else {
-    const newBook = new Book(title, author, pages, read);
-    myLibrary.push(newBook);
-    console.log(newBook);
-    displayBooks();
-    errorMsg.textContent = '';
+// Function to remove book when delete btn is clicked
+function removeBook() {
+  const tblBody = document.querySelector('tbody');
+  const libraryList = tblBody.children;
+  console.log(libraryList);
+  for (list of libraryList) {
+    if (list.hasAttribute('data-delete')) {
+      list.remove();
+    }
   }
 }
-// Add form inputs to array
-const form = document.querySelector('#myform');
-form.addEventListener('submit', (e) => {
-  e.preventDefault();
-  addBookToLibrary();
-  // Clear out form after
-  form.reset();
-});
 
-// Function check to see if delete is clicked
-const libraryList = document.querySelector('.library-books');
-console.log(libraryList);
-libraryList.addEventListener('click', (e) => {
-  const origin = e.target;
-  console.log(origin);
-  myLibrary.forEach((library) => {
-    // Loop over myLibrary array and if each index (library) contains the data atrribute 'removebooks' remove it from the array
-  }
-});
-
-
-
-
-// function removeBook() {
-//   this.parentElement.remove();
-//   console.log(this);
-// }
+// If I loop through through html collections using this method, it deletes all the book instead of 1
+/* function removeBook() {
+  const tblBody = document.querySelector('tbody');
+  const libraryList = tblBody.children;
+  console.log(libraryList);
+  Array.from(libraryList).forEach((list, index) => {
+    if (list.hasAttribute('data-delete')) {
+      list.remove(index);
+    }
+  });
+} */
