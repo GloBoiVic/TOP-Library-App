@@ -43,7 +43,7 @@ function addBookToLibrary() {
   const read = document.querySelector('#read-status').value;
   const errorMsg = document.querySelector('.error-msg');
 
-  // Break out of form if empty
+  // Display errorMsg if form is empty
   if (title === '' || author === '' || pages === '') {
     errorMsg.textContent = 'Please fill out all fields';
   } else {
@@ -58,13 +58,14 @@ function addBookToLibrary() {
   }
 }
 
-// Add form inputs to array
+// Submit form inputs to array
 const form = document.querySelector('#myform');
 form.addEventListener('submit', (e) => {
   e.preventDefault();
   addBookToLibrary();
 });
 
+// Displays book in table format
 function displayBooks() {
   const table = document.querySelector('table');
   const tblBody = document.querySelector('tbody');
@@ -83,11 +84,11 @@ function displayBooks() {
   modal.style.display = 'none';
 }
 
+// Create book elements
 function renderBook(book, index) {
   const tblRow = document.createElement('tr');
-  tblRow.dataset.delete = 'removebooks';
 
-  let tblCell1 = document.createElement('td');
+  const tblCell1 = document.createElement('td');
   tblCell1.textContent = book.title;
   tblRow.appendChild(tblCell1);
 
@@ -119,6 +120,7 @@ function renderBook(book, index) {
   tblCell5.appendChild(deleteBtn);
   tblRow.appendChild(tblCell5);
 
+  // Returns tblRow so it can be appended to tblBody above
   return tblRow;
 }
 
