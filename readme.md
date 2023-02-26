@@ -20,15 +20,6 @@
   </h3>
 </div>
 
-## :file_folder: Table of Contents
-
-- [General Info](#general-information)
-- [Technologies Used](#technologies-used)
-- [Features](#features)
-- [Screenshots](#screenshots)
-- [Room for Improvement](#room-for-improvement)
-- [Contact](#contact)
-
 ## :page_facing_up: General Information
 
 Project Library in the Odin JavaScript course
