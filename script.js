@@ -20,20 +20,20 @@ closeBtn.addEventListener('click', () => {
   modal.style.display = 'none';
 });
 
-// Start Library Logic
-let myLibrary = [];
+const myLibrary = [];
 
-// Book constructor
-function Book(title, author, pages, read) {
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.read = read;
+class Book {
+  constructor(title, author, pages, read) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.read = read;
+  }
+
+  toggleRead() {
+    this.read = this.read === 'Read' ? 'Unread' : 'Read';
+  }
 }
-
-Book.prototype.toggleRead = function () {
-  this.read = this.read === 'Read' ? 'Unread' : 'Read';
-};
 
 // Get form info from the DOM and push book to library array
 function addBookToLibrary() {
@@ -123,7 +123,6 @@ function renderBook(book, index) {
   // Returns tblRow so it can be appended to tblBody above
   return tblRow;
 }
-
 // Adds default books to the page
 function addDefaultBooks() {
   const book1 = new Book('Think and Grow Rich', 'Napoleon Hill', 397, 'Unread');
@@ -131,11 +130,7 @@ function addDefaultBooks() {
   myLibrary.push(book1, book2);
 }
 
-// Call addDefaultBooks before displaying books
-addDefaultBooks();
-displayBooks();
-
-// Function to remove book when delete btn is clicked
+// Remove book when delete btn is clicked
 function removeBook(event) {
   const tblBody = document.querySelector('tbody');
   const libraryList = tblBody.children;
@@ -145,3 +140,9 @@ function removeBook(event) {
   tblBody.removeChild(libraryList[index]);
   myLibrary.splice(index, 1);
 }
+
+// Call addDefaultBooks before displaying books
+document.addEventListener('DOMContentLoaded', () => {
+  addDefaultBooks();
+  displayBooks();
+});
