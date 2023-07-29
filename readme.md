@@ -46,4 +46,4 @@ To improve this project, I would like to:
 
 ## :bust_in_silhouette: Contact
 
-- GitHub [@GloBoiVic](https://github.com/vicdatrader) - please reach out to me! I want to connect with other coders!
+- GitHub [@GloBoiVic](https://github.com/GloBoiVic) - please reach out to me! I want to connect with other coders!
